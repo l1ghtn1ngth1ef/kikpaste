@@ -37,8 +37,7 @@ function NewPastePage() {
     await router.push(Routes.ShowPastePage({ pasteId: paste.id }))
     console.log("Pressed Button!")
     console.log("Values!", values)
-    console.log("paste Value!", values.target.value)
-    setValue(values.target.value)
+    console.log("paste Value!", values)
   }
 
   const inputHandler = (event, editor) => {}
@@ -46,7 +45,7 @@ function NewPastePage() {
   useEffect(() => {
     editorRef.current = {
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor, //Added .CKEditor
-      DecoupledEditor: require("@ckeditor/ckeditor5-build-decoupled-document"),
+      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
     }
     setEditorLoaded(true)
   }, [])
@@ -68,17 +67,17 @@ function NewPastePage() {
             type="text"
           />
           <LabeledTextField
-            className={values && "filled"}
+            className="pasteContent"
             name="pasteContent"
             label="Paste Content"
-            placeholder="Paste Content"
+            placeholder={data}
             type="text"
           />
 
           {/* template: <__component__ name="__fieldName__" label="__Field_Name__" placeholder="__Field_Name__"  type="__inputType__" /> */}
 
           <CKEditor
-            editor={DecoupledEditor}
+            editor={ClassicEditor}
             data={data}
             onReady={(editor: any) => {
               console.log("Editor is ready to use!", editor)
@@ -90,7 +89,7 @@ function NewPastePage() {
               setData(data)
 
               console.log("setData!", stringify(event))
-              console.log("Data: ", data)
+              console.log("CKEditor Data: ", data)
             }}
           />
           <button type="submit">Submit!</button>
