@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "sourceMap": true,
+    "removeComments": true,
+    "noImplicitAny": false,
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -15,12 +18,16 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "checkJs": true,
+    "jsx": "preserve", // 👈️ make sure you have this
     "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "types": ["jest", "mocha", "node"],
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "exclude": ["node_modules", "**/*.e2e.ts", "cypress"],
+  "exclude": ["node_modules", "**/*.e2e.ts", "cypress", "**/*.spec.ts", "**/*.test.ts"],
   "include": [
+    "src/**/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

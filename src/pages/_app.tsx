@@ -4,16 +4,12 @@ import React from "react"
 import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
 import dynamic from "next/dynamic"
-
-const TextEditor = dynamic(() => import("../components/TextEditor"), {
-  // Do not import in server side
-  ssr: false,
-})
+require("events").EventEmitter.prototype._maxListeners = 100
+//💄❤️🚀💣🍺👁️‍🗨️🎅😎🙃😘💯
 const NewPastePage = dynamic(() => import("src/pages/pastes/new"), {
   // Do not import in server side
   ssr: false,
 })
-
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
     return <div>Error: You are not authenticated</div>

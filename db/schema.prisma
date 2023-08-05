@@ -78,3 +78,12 @@ model Paste {
   pasteName        String
   pasteContent     String
 }
+
+model Pastebackup {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  dataName    String
+  dataDesc    String
+  dataContent String
+}

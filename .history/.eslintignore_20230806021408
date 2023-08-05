@@ -1,0 +1,2 @@
+/src/auth/mutations/resetPassword.test.ts
+/src/auth/mutations/forgotPassword.test.ts

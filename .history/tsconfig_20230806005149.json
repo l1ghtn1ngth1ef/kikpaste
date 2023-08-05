@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": true,
+    "removeComments": true,
+    "noImplicitAny": true,
+    "noImplicitAny": true, 
+
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "checkJs": true,
+    "jsx": "preserve", // 👈️ make sure you have this
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "types": [
+      "jest",
+      "jasmine",
+      "mocha",
+      "node"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.e2e.ts",
+    "cypress",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": [
+    "src/**/*",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types",
+    "src/pages/api/rpc/[pasteId].config",
+    "src/pages/api/rpc/[pasteId].config",
+    "src/pages/api/[getPasteId].ts",
+    "src/pages/api/rpc/[webhookId].config"
+  ]
+}

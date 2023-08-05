@@ -9,19 +9,11 @@ import styles from "src/styles/Home.module.css"
 import dynamic from "next/dynamic"
 import db from "db"
 
-const TextEditor = dynamic(() => import("../components/TextEditor"), {
-  // Do not import in server side
-  ssr: false,
-})
 const NewPastePage = dynamic(() => import("src/pages/pastes/new"), {
   // Do not import in server side
   ssr: false,
 })
 
-const Result = dynamic(() => import("../components/Result"), {
-  // Do not import in server side
-  ssr: false,
-})
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
