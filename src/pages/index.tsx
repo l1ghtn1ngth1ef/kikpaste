@@ -8,11 +8,12 @@ import { Routes, BlitzPage } from "@blitzjs/next"
 import styles from "src/styles/Home.module.css"
 import dynamic from "next/dynamic"
 import db from "db"
-
-const NewPastePage = dynamic(() => import("src/pages/pastes/new"), {
-  // Do not import in server side
-  ssr: false,
-})
+import { useEffect, useState } from "react"
+import CKeditor from "src/pastes/components/ckEditor"
+import { PasteForm } from "src/pastes/components/PasteForm"
+import { Form } from "react-final-form"
+import createPaste from "src/pastes/mutations/createPaste"
+import { CreatePasteSchema } from "src/pastes/schemas"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -56,6 +57,13 @@ const UserInfo = () => {
 }
 
 const Home: BlitzPage = () => {
+  const [editorLoaded, setEditorLoaded] = useState<boolean>(false)
+  const [data, setData] = useState<string>("")
+
+  useEffect(() => {
+    setEditorLoaded(true)
+  }, [])
+
   return (
     <Layout title="Home">
       <div className={styles.globe} />
@@ -66,11 +74,8 @@ const Home: BlitzPage = () => {
             <strong>Congrats!</strong> Your app is ready, including user sign-up and log-in.
           </p>
         </div>
-        <div style={{ display: "block", width: "50%", margin: "0px auto" }}>
-          <Suspense fallback="Loading...">
-            <NewPastePage />
-          </Suspense>
-        </div>
+
+        <div style={{ display: "block", width: "50%", margin: "0px auto" }}></div>
         <main className={styles.main}>
           <div className={styles.wrapper}>
             <div className={styles.header}>
@@ -81,18 +86,47 @@ const Home: BlitzPage = () => {
                   <path d="M42.4727 33.2822H31.7398C27.6555 33.2822 23.8086 31.3626 21.3528 28.0991L10.7656 14.0297C10.5656 13.7638 10.5354 13.4068 10.688 13.1111L16.7908 1.28696C17.0836 0.719654 17.8684 0.652924 18.2528 1.16266L42.4727 33.2822Z"></path>
                 </svg>
               </div>
-
+              <div>
+                <form
+                  onSubmit={async (values) => {
+                    try {
+                      const paste = await createPasteMutation(values)
+                      await router.push(Routes.ShowPastePage({ pasteId: paste.id }))
+                    } catch (error: any) {
+                      console.error(error)
+                      return {
+                        [FORM_ERROR]: error.toString(),
+                      }
+                    }
+                  }}
+                >
+                  pasteName:
+                  <input type="text" name="pasteName" placeholder="pasteName" type="text" />
+                  pasteDesc:
+                  <input type="text" name="pasteDescription" placeholder="pasteDesc" type="text" />
+                  pasteContent:
+                  <input type="hidden" name="pasteContent" placeholder={data} type="text" />
+                  {/* template: <__component__ name="__fieldName__" label="__Field_Name__" placeholder="__Field_Name__"  type="__inputType__" /> */}
+                  <CKeditor
+                    name="pasteContent"
+                    onChange={(data: string) => {
+                      setData(data)
+                    }}
+                    editorLoaded={editorLoaded}
+                  />
+                  {JSON.stringify(data)}
+                  <button type="submit">Submit!</button>
+                </form>
+              </div>
               <h1>Your database & authentication is ready. Try it by signing up.</h1>
 
               {/* Auth */}
-
               <div className={styles.buttonContainer}>
                 <Suspense fallback="Loading...">
                   <UserInfo />
                 </Suspense>
               </div>
             </div>
-
             <div className={styles.body}>
               {/* Instructions */}
               <div className={styles.instructions}>
