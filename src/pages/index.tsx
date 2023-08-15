@@ -6,7 +6,10 @@ import logout from "src/auth/mutations/logout"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
 import styles from "src/styles/Home.module.css"
-import Editor from "src/pastes/components/CKEditor"
+
+const Editor = dynamic(() => import("src/pastes/components/CKEditor"), {
+  ssr: false,
+})
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -83,7 +86,7 @@ const Home: BlitzPage = () => {
                 </Suspense>
               </div>
             </div>
-            <div >
+            <div>
               <Editor />
             </div>
             <div className={styles.body}>
