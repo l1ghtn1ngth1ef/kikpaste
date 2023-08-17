@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[118],{9993:function(e,n,i){var s=i(5893),c=i(9008),l=i.n(c);i(7294),n.Z=e=>{let{title:n,children:i}=e;return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsxs)(l(),{children:[(0,s.jsx)("title",{children:n||"blitz"}),(0,s.jsx)("link",{rel:"icon",href:"/favicon.ico"})]}),i]})}}}]);
