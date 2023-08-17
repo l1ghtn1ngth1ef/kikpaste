@@ -57,6 +57,7 @@
     "autoprefixer": "10.x",
     "axios": "1.4.0",
     "blitz": "2.0.0-beta.31",
+    "ckeditor5-build-decoupled-document": "1.0.8",
     "ckeditor5-code-block": "1.0.11",
     "ckeditor5-custom-build": "file:./ckeditor",
     "colors": "1.4.0",
