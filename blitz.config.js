@@ -1,13 +1,52 @@
-import { PHASE_DEVELOPMENT_SERVER } from "next/constants"
+const withImages = require("next-images")
+const withCSS = require("@zeit/next-css")
+const { styles } = require("@ckeditor/ckeditor5-dev-utils")
 
-module.exports = (phase, { defaultConfig }) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      /* development only config options here */
-    }
-  }
+module.exports = withCSS(
+  withImages({
+    webpack(config, options) {
+      config.module.rules.forEach(function (rule, index, array) {
+        const test = (rule.test && rule.test.toString()) || ""
+        if (test.includes("css")) {
+          array[index] = {
+            ...rule,
+            exclude: /ckeditor5-[^/]+\/theme\/[\w-/]+\.css$/,
+          }
+        } else if (test.includes("svg")) {
+          array[index] = {
+            ...rule,
+            exclude: /ckeditor5-[^/]+\/theme\/icons\/.+\.svg$/,
+          }
+        }
+      })
 
-  return {
-    /* config options for all phases except development here */
-  }
-}
+      config.module.rules.push({
+        test: /ckeditor5-[^/]+\/theme\/[\w-/]+\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "singletonStyleTag",
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: styles.getPostCssConfig({
+              themeImporter: {
+                themePath: require.resolve("@ckeditor/ckeditor5-theme-lark"),
+              },
+              minify: true,
+            }),
+          },
+        ],
+      })
+
+      config.module.rules.push({
+        test: /ckeditor5-[^/]+\/theme\/icons\/.+\.svg$/,
+        use: ["raw-loader"],
+      })
+
+      return config
+    },
+  })
+)
