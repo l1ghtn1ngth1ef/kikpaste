@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import { Link as Link1 } from "next/link"
 import Layout from "src/core/layouts/Layout"
 import { useCurrentUser } from "src/users/hooks/useCurrentUser"
 import logout from "src/auth/mutations/logout"
@@ -11,11 +10,9 @@ import db from "db"
 import TextEditor from "src/pastes/components/CKEditor"
 import { useEffect, useState, useRef } from "react"
 import { PasteForm } from "src/pastes/components/PasteForm"
-import { createPaste } from "src/pastes/mutations/createPaste"
 import { CreatePasteSchema } from "src/pastes/schemas"
 import { Form, FormProps } from "src/core/components/Form"
 import { LabeledTextField } from "src/core/components/LabeledTextField"
-import { DecoupledEditor } from "@ckeditor/ckeditor5-build-decoupled-document"
 import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor"
 import { CKEditor, CKEditorContext } from "@ckeditor/ckeditor5-react"
 import ContextBase from "@ckeditor/ckeditor5-core/src/context"
@@ -46,107 +43,137 @@ import ContextBase from "@ckeditor/ckeditor5-core/src/context"
 //import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock'
 //import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter'
 
-
-//
 import "src/styles/Home.module.css"
-const ImageUpload = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-
-const Link = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Alignment = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Strikethrough = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Underline = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Italic = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Bold = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Paragraph = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const ImageStyle = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Heading = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Font = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const ImageToolbar = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const TextTransformation = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const TableToolbar = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Table = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const List = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-
-const ImageResize = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const BlockQuote = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Essentials = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const ClipBoard = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const PasteFromOffice = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const MediaEmbed = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const ClipBoImageUploadard = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Indent = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const IndentBlock = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Base64UploadAdapter = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-const Context = dynamic(() => import("@ckeditor/ckeditor5-react"), {
-  ssr: false,
-})
-const CodeBlock = dynamic(() => import("ckeditor5-custom-build"), {
-  ssr: false,
-})
-
-//
-const isServer = () => typeof window === `undefined`;
-
+// @ts-ignore
 const NewEditor = () => {
   const editorRef = useRef()
   const [editorLoaded, setEditorLoaded] = useState(false)
-  const { DecoupledEditor } = editorRef.current || {}
+  // @ts-ignore
+  const {
+    // @ts-ignore
+    DecoupledEditor,
+    // @ts-ignore
 
+    ImageUpload,
+    // @ts-ignore
+
+    Link,
+    // @ts-ignore
+
+    Alignment,
+    // @ts-ignore
+
+    Strikethrough,
+    // @ts-ignore
+
+    Underline,
+    // @ts-ignore
+
+    Italic,
+    // @ts-ignore
+
+    Bold,
+    // @ts-ignore
+
+    Paragraph,
+    // @ts-ignore
+    // @ts-ignore
+
+    ImageStyle,
+    // @ts-ignore
+
+    Heading,
+    // @ts-ignore
+
+    Font,
+    // @ts-ignore
+
+    ImageToolbar,
+    // @ts-ignore
+
+    TextTransformation,
+    // @ts-ignore
+    // @ts-ignore
+
+    TableToolbar,
+    // @ts-ignore
+
+    Table,
+    // @ts-ignore
+
+    List,
+    // @ts-ignore
+
+    ImageResize,
+    // @ts-ignore
+
+    BlockQuote,
+    // @ts-ignore
+
+    Essentials,
+    // @ts-ignore
+
+    ClipBoard,
+    // @ts-ignore
+
+    PasteFromOffice,
+    // @ts-ignore
+
+    MediaEmbed,
+    // @ts-ignore
+
+    Indent,
+    // @ts-ignore
+
+    IndentBlock,
+
+    // @ts-ignore
+
+    Base64UploadAdapter,
+    // @ts-ignore
+
+    Context,
+    // @ts-ignore
+
+    CodeBlock,
+    // @ts-ignore
+  } = editorRef.current || {}
+
+  // @ts-ignore
   useEffect(() => {
+    // @ts-ignore
     editorRef.current = {
       DecoupledEditor: require("/ckeditor/build/ckeditor.js"),
+      ImageUpload: require("/ckeditor/build/ckeditor.js"),
+      Link: require("/ckeditor/build/ckeditor.js"),
+      Alignment: require("/ckeditor/build/ckeditor.js"),
+      Strikethrough: require("/ckeditor/build/ckeditor.js"),
+      Underline: require("/ckeditor/build/ckeditor.js"),
+      Italic: require("/ckeditor/build/ckeditor.js"),
+      Bold: require("/ckeditor/build/ckeditor.js"),
+      Paragraph: require("/ckeditor/build/ckeditor.js"),
+      ImageStyle: require("/ckeditor/build/ckeditor.js"),
+      Heading: require("/ckeditor/build/ckeditor.js"),
+      Font: require("/ckeditor/build/ckeditor.js"),
+      // @ts-ignore
+
+      ImageToobar: require("/ckeditor/build/ckeditor.js"),
+
+      TextTransforamtion: require("/ckeditor/build/ckeditor.js"),
+      TableToolbar: require("/ckeditor/build/ckeditor.js"),
+      Table: require("/ckeditor/build/ckeditor.js"),
+      List: require("/ckeditor/build/ckeditor.js"),
+      ImageResize: require("/ckeditor/build/ckeditor.js"),
+      BlockQuote: require("/ckeditor/build/ckeditor.js"),
+      Essentials: require("/ckeditor/build/ckeditor.js"),
+      ClipBoard: require("/ckeditor/build/ckeditor.js"),
+      PasteFromOffice: require("/ckeditor/build/ckeditor.js"),
+      MediaEmbed: require("/ckeditor/build/ckeditor.js"),
+      Indent: require("/ckeditor/build/ckeditor.js"),
+      IndentBlock: require("/ckeditor/build/ckeditor.js"),
+      Base64UploadAdapter: require("/ckeditor/build/ckeditor.js"),
+      Context: require("/ckeditor/build/ckeditor.js"),
+      CodeBlock: require("/ckeditor/build/ckeditor.js"),
     }
     setEditorLoaded(true)
   }, [])
@@ -162,6 +189,7 @@ const NewEditor = () => {
           style={{ height: 500 }}
           config={{
             codeBlock: {
+              // @ts-ignore
               languages: [
                 { language: "plaintext", label: "Plain text" },
                 { language: "c", label: "C" },
@@ -178,6 +206,7 @@ const NewEditor = () => {
                 { language: "typescript", label: "TypeScript" },
                 { language: "xml", label: "XML" },
               ],
+              // @ts-ignore
               plugins: [
                 Essentials,
                 Paragraph,
@@ -282,9 +311,11 @@ const NewEditor = () => {
                 "|",
                 "imageTextAlternative",
               ],
+              // @ts-ignore
               styles: ["full", "alignLeft", "alignRight"],
             },
             typing: {
+              // @ts-ignore
               transformations: {
                 remove: [
                   "enDash",
@@ -307,24 +338,31 @@ const NewEditor = () => {
             })
           }}
           onReady={(editor) => {
+            // @ts-ignore
+            // Set the UI
+            editor.ui.getEditableElement().parentElement.insertBefore(
+              // @ts-ignore
 
-            // Set the UI 
-            editor.ui
-            .getEditableElement()
-            .parentElement.insertBefore(
               editor.ui.view.toolbar.element,
+              // @ts-ignore
+
               editor.ui.getEditableElement()
             )
-          editor.editing.view.change((writer) => {
-            writer.setStyle("width", "100%", editor.editing.view.document.getRoot())
-          })
+            editor.editing.view.change((writer) => {
+              // @ts-ignore
+
+              writer.setStyle("width", "100%", editor.editing.view.document.getRoot())
+            })
             // You can store the "editor" and use when it is needed.
 
             console.log("Editor is ready to use!", editor)
+            // @ts-ignore
 
             editorRef.current = editor
           }}
           onChange={(event, editor) => {
+            // @ts-ignore
+
             const data = editor.getData()
             console.log({ event, editor, data })
           }}
@@ -340,6 +378,8 @@ const NewEditor = () => {
             // This is why you need to remove the older toolbar.
             if (willEditorRestart) {
               if (editorRef.current) {
+                // @ts-ignore
+
                 editorRef.current.ui.view.toolbar.element.remove()
               }
             }
@@ -351,5 +391,5 @@ const NewEditor = () => {
     </Layout>
   )
 }
-
-export default () => <NewEditor  />
+// @ts-ignore
+export default () => <NewEditor />
