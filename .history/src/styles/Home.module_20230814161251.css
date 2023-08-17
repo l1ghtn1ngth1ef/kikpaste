@@ -1,0 +1,456 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+  padding: 0rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+.frost {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.31);
+}
+
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0rem 2rem 0rem;
+  text-align: center;
+  gap: 2rem;
+}
+
+.header h1 {
+  max-width: 620px;
+  align-self: center;
+
+}
+
+.body {
+  composes: frost;
+  border-radius: var(--border-radius);
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+  flex-direction: row;
+  align-self: center;
+  max-width: calc(min(var(--screen-width),800px));
+}
+
+
+.instructions {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+}
+
+.globe {
+  position: fixed;
+  width: 350vmin;
+  height: 75vmin;
+  left: 20%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 40px));
+  z-index: -1;
+  border-radius: 100%;
+  background-image: radial-gradient(95.63% 95.63% at 95.92% 0%, rgba(255, 255, 255, 0.62) 0%, #8155ff38 60.42%, #002fff5c 169%);
+  filter: blur(8vmin);
+}
+
+.footer {
+  display: flex;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer span {
+  margin-right: 0.2rem;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.code span {
+  background: rgba(124, 58, 237, 50%);
+  border-radius: 50rem;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 17px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(57, 33, 97);
+}
+
+.code pre {
+  background: rgba(124, 58, 237, 12%);
+  border-radius: 4px;
+  padding: 0.7em 1.4em;
+  text-align: center;
+}
+
+.code code {
+  font-size: 0.86em;
+  font-weight: bold;
+  color: rgb(124, 58, 237);
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.toastContainer {
+  border: 1px solid #edff;
+  padding: 0 1rem;
+  background: #eeff;
+  color: #62af;
+  text-align: center;
+}
+
+.toastContainer strong {
+  color: rgb(124, 58, 237);
+}
+
+.textLink {
+  color: rgb(124, 58, 237);
+  background:
+    linear-gradient(
+      to right,
+      rgba(231, 216, 246, 1),
+      rgba(231, 216, 246, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(99, 1, 235, 1),
+      rgba(124, 58, 237, 1),
+      rgba(231, 216, 246, 1)
+  );
+  background-size: 100% 1px, 0 1px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.textLink:hover,
+.textLink:focus,
+.textLink:active {
+  background-size: 0 1px, 100% 1px;
+}
+
+.arrowIcon {
+  box-sizing: border-box;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid;
+  transform: scale(var(--ggs,1));
+  border-right: 2px solid;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  color:#b1a5c4;
+}
+
+.arrowIcon::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  top: 2px;
+  right: -1px
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.button {
+  background: linear-gradient(to top, rgb(124, 58, 237), rgb(117, 81, 236));
+  border: 1px solid rgb(231, 216, 246);
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+  padding: 0 24px;
+  height: 48px;
+  width: 200px;
+  max-width: 300px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  user-select: none;
+  white-space: nowrap;
+  border-radius: 0.75rem;
+  border-bottom-left-radius: 0px;
+  font-size: 15px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white;
+  text-shadow: rgb(0 0 0 / 56%) 0px 3px 12px;
+  box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
+}
+
+.loginButton {
+  composes: button;
+  background: rgb(248 250 252);
+  border: 1px solid rgb(231, 216, 246);
+  color: rgb(30 41 59);
+  text-shadow: none;
+}
+
+.loginButton:hover {
+  color: rgb(30 41 59);
+  text-shadow: none;
+}
+
+.card:hover .arrowIcon {
+  color: #7450ec;
+}
+
+.linkGrid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+.card {
+  composes: frost;
+  padding: 1rem 0rem;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  max-width: 200px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #7450ec;
+  border-color: #7450ec;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.logo {
+  flex: 1;
+  padding: 1rem 2rem;
+}
+
+.logo svg {
+  height: 100%;
+  width: 200px;
+  fill: #7450ec;
+}
+
+
+/* MOBILE */
+@media(max-width:800px) {
+  .linkGrid {
+    width: 100%;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .body {
+    flex-wrap: wrap;
+  }
+
+  .buttonContainer {
+    flex-wrap: wrap;
+  }
+
+}
+
+.document-editor {
+  border: 1px solid var(--ck-color-base-border);
+  border-radius: var(--ck-border-radius);
+
+  /* Set vertical boundaries for the document editor. */
+  max-height: 700px;
+
+  /* This element is a flex container for easier rendering. */
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.document-editor__toolbar {
+  /* Make sure the toolbar container is always above the editable. */
+  z-index: 1;
+
+  /* Create the illusion of the toolbar floating over the editable. */
+  box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
+
+  /* Use the CKEditor CSS variables to keep the UI consistent. */
+  border-bottom: 1px solid var(--ck-color-toolbar-border);
+}
+
+/* Adjust the look of the toolbar inside the container. */
+.document-editor__toolbar .ck-toolbar {
+  border: 0;
+  border-radius: 0;
+}
+
+/* Make the editable container look like the inside of a native word processor application. */
+.document-editor__editable-container {
+  padding: calc(2 * var(--ck-spacing-large));
+  background: var(--ck-color-base-foreground);
+
+  /* Make it possible to scroll the "page" of the edited content. */
+  overflow-y: scroll;
+}
+
+.document-editor__editable-container .ck-editor__editable {
+  /* Set the dimensions of the "page". */
+  width: 15.8cm;
+  min-height: 21cm;
+
+  /* Keep the "page" off the boundaries of the container. */
+  padding: 1cm 2cm 2cm;
+
+  border: 1px hsl(0, 0%, 82.7%) solid;
+  border-radius: var(--ck-border-radius);
+  background: white;
+
+  /* The "page" should cast a slight shadow (3D illusion). */
+  box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.1);
+
+  /* Center the "page". */
+  margin: 0 auto;
+}
+
+/* Set the default font for the "page" of the content. */
+.document-editor .ck-content,
+.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+  font: 16px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Adjust the headings dropdown to host some larger heading styles. */
+.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+  line-height: calc(1.7 * var(--ck-line-height-base) * var(--ck-font-size-base));
+  min-width: 6em;
+}
+
+/* Scale down all heading previews because they are way too big to be presented in the UI.
+  Preserve the relative scale, though. */
+.document-editor
+  .ck-heading-dropdown
+  .ck-list
+  .ck-button:not(.ck-heading_paragraph)
+  .ck-button__label {
+  transform: scale(0.8);
+  transform-origin: left;
+}
+
+/* Set the styles for "Heading 1". */
+.document-editor .ck-content h2,
+.document-editor .ck-heading-dropdown .ck-heading_heading1 .ck-button__label {
+  font-size: 2.18em;
+  font-weight: normal;
+}
+
+.document-editor .ck-content h2 {
+  line-height: 1.37em;
+  padding-top: 0.342em;
+  margin-bottom: 0.142em;
+}
+
+/* Set the styles for "Heading 2". */
+.document-editor .ck-content h3,
+.document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
+  font-size: 1.75em;
+  font-weight: normal;
+  color: hsl(203, 100%, 50%);
+}
+
+.document-editor .ck-heading-dropdown .ck-heading_heading2.ck-on .ck-button__label {
+  color: var(--ck-color-list-button-on-text);
+}
+
+/* Set the styles for "Heading 2". */
+.document-editor .ck-content h3 {
+  line-height: 1.86em;
+  padding-top: 0.171em;
+  margin-bottom: 0.357em;
+}
+
+/* Set the styles for "Heading 3". */
+.document-editor .ck-content h4,
+.document-editor .ck-heading-dropdown .ck-heading_heading3 .ck-button__label {
+  font-size: 1.31em;
+  font-weight: bold;
+}
+
+.document-editor .ck-content h4 {
+  line-height: 1.24em;
+  padding-top: 0.286em;
+  margin-bottom: 0.952em;
+}
+
+/* Set the styles for "Paragraph". */
+.document-editor .ck-content p {
+  font-size: 1em;
+  line-height: 1.63em;
+  padding-top: 0.5em;
+  margin-bottom: 1.13em;
+}
+
+/* Make the block quoted text serif with some additional spacing. */
+.document-editor .ck-content blockquote {
+  font-family: Georgia, serif;
+  margin-left: calc(2 * var(--ck-spacing-large));
+  margin-right: calc(2 * var(--ck-spacing-large));
+}

@@ -3,13 +3,25 @@ import { AuthenticationError, AuthorizationError } from "blitz"
 import React from "react"
 import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
+import "src/styles/ckeditor.css"
+
 import dynamic from "next/dynamic"
+
+import "src/core/styles/index.css"
+import "src/core/styles/ckeditor.css"
+
+const Editor = dynamic(() => import("src/pastes/components/CKEditor"), {
+  ssr: false,
+})
+
 require("events").EventEmitter.prototype._maxListeners = 100
-//💄❤️🚀💣🍺👁️‍🗨️🎅😎🙃😘💯
+//💄❤️🚀💣🍺👁️‍🗨️🎅😎🙃😘💯⚡
+
 const NewPastePage = dynamic(() => import("src/pages/pastes/new"), {
   // Do not import in server side
   ssr: false,
 })
+
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
     return <div>Error: You are not authenticated</div>
@@ -32,8 +44,8 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   if (typeof window !== "undefined") {
-    console.log(window.innerWidth)
-    console.log(window.innerHeight)
+    console.log("Width:", window.innerWidth)
+    console.log("Height: ", window.innerHeight)
   }
   const getLayout = Component.getLayout || ((page) => page)
   return (
