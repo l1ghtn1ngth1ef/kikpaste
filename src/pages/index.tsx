@@ -7,9 +7,9 @@ import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
 import styles from "src/styles/Home.module.css"
 import dynamic from "next/dynamic"
-import NoSSR from 'react-no-ssr';
+import NoSSR from "react-no-ssr"
 import { useEffect, useState, useRef } from "react"
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom"
 import React from "react"
 
 const Editor = dynamic(() => import("src/pastes/components/CKEditor"), {
@@ -19,8 +19,7 @@ const Editor = dynamic(() => import("src/pastes/components/CKEditor"), {
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
-*/
-
+ */
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
@@ -91,10 +90,10 @@ const Home: BlitzPage = () => {
                   <UserInfo />
                 </Suspense>
               </div>
-            </div> 
+            </div>
             <div>
               <NoSSR>
-              <Editor />
+                <Editor />
               </NoSSR>
             </div>
             <div className={styles.body}>
@@ -132,7 +131,7 @@ const Home: BlitzPage = () => {
                       <code>
                         Go to{" "}
                         <Link href="/pastes" className={styles.textLink}>
-                        /pastes
+                          /pastes
                         </Link>
                       </code>
                     </pre>
