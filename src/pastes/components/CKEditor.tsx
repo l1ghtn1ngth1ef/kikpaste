@@ -54,92 +54,61 @@ const NewEditor = () => {
     // @ts-ignore
     DecoupledEditor,
     // @ts-ignore
-
     ImageUpload,
     // @ts-ignore
-
     Link,
     // @ts-ignore
-
     Alignment,
     // @ts-ignore
-
     Strikethrough,
     // @ts-ignore
-
     Underline,
     // @ts-ignore
-
     Italic,
     // @ts-ignore
-
     Bold,
     // @ts-ignore
-
     Paragraph,
     // @ts-ignore
-    // @ts-ignore
-
     ImageStyle,
     // @ts-ignore
-
     Heading,
     // @ts-ignore
-
     Font,
     // @ts-ignore
-
     ImageToolbar,
     // @ts-ignore
-
     TextTransformation,
     // @ts-ignore
-    // @ts-ignore
-
     TableToolbar,
     // @ts-ignore
-
     Table,
     // @ts-ignore
-
     List,
     // @ts-ignore
-
     ImageResize,
     // @ts-ignore
-
     BlockQuote,
     // @ts-ignore
-
     Essentials,
     // @ts-ignore
-
     ClipBoard,
     // @ts-ignore
-
     PasteFromOffice,
     // @ts-ignore
-
     MediaEmbed,
     // @ts-ignore
-
     Indent,
     // @ts-ignore
-
     IndentBlock,
-
     // @ts-ignore
-
     Base64UploadAdapter,
     // @ts-ignore
-
     Context,
     // @ts-ignore
-
     CodeBlock,
     // @ts-ignore
   } = editorRef.current || {}
-
   // @ts-ignore
   useEffect(() => {
     // @ts-ignore
@@ -156,10 +125,7 @@ const NewEditor = () => {
       ImageStyle: require("/ckeditor/build/ckeditor.js"),
       Heading: require("/ckeditor/build/ckeditor.js"),
       Font: require("/ckeditor/build/ckeditor.js"),
-      // @ts-ignore
-
       ImageToobar: require("/ckeditor/build/ckeditor.js"),
-
       TextTransforamtion: require("/ckeditor/build/ckeditor.js"),
       TableToolbar: require("/ckeditor/build/ckeditor.js"),
       Table: require("/ckeditor/build/ckeditor.js"),
@@ -343,22 +309,17 @@ const NewEditor = () => {
             // Set the UI
             editor.ui.getEditableElement().parentElement.insertBefore(
               // @ts-ignore
-
               editor.ui.view.toolbar.element,
               // @ts-ignore
-
               editor.ui.getEditableElement()
             )
             editor.editing.view.change((writer) => {
               // @ts-ignore
-
               writer.setStyle("width", "100%", editor.editing.view.document.getRoot())
             })
             // You can store the "editor" and use when it is needed.
-
             console.log("Editor is ready to use!", editor)
             // @ts-ignore
-
             editorRef.current = editor
           }}
           // @ts-ignore
