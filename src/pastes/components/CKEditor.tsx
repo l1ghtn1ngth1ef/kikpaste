@@ -149,206 +149,230 @@ const NewEditor = () => {
 
   return (
     <Layout title="Home">
-      {editorLoaded ? (
-        <CKEditor
-          editor={DecoupledEditor}
-          data="<p>Hello from CKEditor 5!</p>"
-          style={{ height: 500 }}
-          config={{
-            codeBlock: {
-              // @ts-ignore
-              languages: [
-                { language: "plaintext", label: "Plain text" },
-                { language: "c", label: "C" },
-                { language: "cs", label: "C#" },
-                { language: "cpp", label: "C++" },
-                { language: "css", label: "CSS" },
-                { language: "diff", label: "Diff" },
-                { language: "html", label: "HTML" },
-                { language: "java", label: "Java" },
-                { language: "javascript", label: "JavaScript" },
-                { language: "php", label: "PHP" },
-                { language: "python", label: "Python" },
-                { language: "ruby", label: "Ruby" },
-                { language: "typescript", label: "TypeScript" },
-                { language: "xml", label: "XML" },
-              ],
-              // @ts-ignore
-              plugins: [
-                Essentials,
-                Paragraph,
-                Bold,
-                Italic,
-                Heading,
-                Indent,
-                IndentBlock,
-                Underline,
-                Strikethrough,
-                BlockQuote,
-                Font,
-                Alignment,
-                List,
-                Link,
-                MediaEmbed,
-                PasteFromOffice,
-                Image,
-                ImageStyle,
-                ImageToolbar,
-                ImageUpload,
-                ImageResize,
-                Base64UploadAdapter,
-                Table,
-                TableToolbar,
-                TextTransformation,
-                CodeBlock,
-              ],
-              toolbar: [
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "underline",
-                "strikethrough",
-                "|",
-                "fontSize",
-                "fontColor",
-                "fontBackgroundColor",
-                "|",
-                "alignment",
-                "outdent",
-                "indent",
-                "bulletedList",
-                "numberedList",
-                "blockQuote",
-                "|",
-                "link",
-                "insertTable",
-                "imageUpload",
-                "mediaEmbed",
-                "|",
-                "undo",
-                "redo",
-              ],
-              heading: {
-                options: [
-                  {
-                    model: "paragraph",
-                    view: "p",
-                    title: "Paragraph",
-                    class: "ck-heading_paragraph",
-                  },
-                  {
-                    model: "heading1",
-                    view: "h1",
-                    title: "Heading 1",
-                    class: "ck-heading_heading1",
-                  },
-                  {
-                    model: "heading2",
-                    view: "h2",
-                    title: "Heading 2",
-                    class: "ck-heading_heading2",
-                  },
-                  {
-                    model: "heading3",
-                    view: "h3",
-                    title: "Heading 3",
-                    class: "ck-heading_heading3",
-                  },
-                ],
-              },
-              fontSize: {
-                options: [
-                  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 25, 27, 29, 31, 33, 35,
-                ],
-              },
-            },
-            alignment: {
-              options: ["justify", "left", "center", "right"],
-            },
-            table: {
-              contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
-            },
-            image: {
-              resizeUnit: "px",
-              toolbar: [
-                "imageStyle:alignLeft",
-                "imageStyle:full",
-                "imageStyle:alignRight",
-                "|",
-                "imageTextAlternative",
-              ],
-              // @ts-ignore
-              styles: ["full", "alignLeft", "alignRight"],
-            },
-            typing: {
-              // @ts-ignore
-              transformations: {
-                remove: [
-                  "enDash",
-                  "emDash",
-                  "oneHalf",
-                  "oneThird",
-                  "twoThirds",
-                  "oneForth",
-                  "threeQuarters",
-                ],
-              },
-            },
-            placeholder: "Click here to start typing",
-          }}
-          onInit={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            // console.log("Editor is ready to use!", editor);
-            editor.editing.view.change((writer) => {
-              writer.setStyle("width", "50%", editor.editing.view.document.getRoot())
-            })
-          }}
-          onReady={(editor) => {
-            // @ts-ignore
-            // Set the UI
-            editor.ui.getEditableElement().parentElement.insertBefore(
-              // @ts-ignore
-              editor.ui.view.toolbar.element,
-              // @ts-ignore
-              editor.ui.getEditableElement()
-            )
-            editor.editing.view.change((writer) => {
-              // @ts-ignore
-              writer.setStyle("width", "100%", editor.editing.view.document.getRoot())
-            })
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor)
-            // @ts-ignore
-            editorRef.current = editor
-          }}
-          // @ts-ignore
-          onChange={(event, editor) => {
-            // @ts-ignore
-            const data = editor.getData()
-            console.log({ event, editor, data })
-          }}
-          onBlur={(event, editor) => {
-            console.log("Blur.", editor)
-          }}
-          onFocus={(event, editor) => {
-            console.log("Focus.", editor)
-          }}
-          onError={(error, { willEditorRestart }) => {
-            // If the editor is restarted, the toolbar element will be created once again.
-            // The `onReady` callback will be called again and the new toolbar will be added.
-            // This is why you need to remove the older toolbar.
-            if (willEditorRestart) {
-              if (editorRef.current) {
+      <form>
+        {editorLoaded ? (
+          <CKEditor
+            editor={DecoupledEditor}
+            data="<p>Hello from CKEditor 5!</p>"
+            style={{ height: 500 }}
+            config={{
+              codeBlock: {
                 // @ts-ignore
-                editorRef.current.ui.view.toolbar.element.remove()
+                languages: [
+                  { language: "plaintext", label: "Plain text" },
+                  { language: "c", label: "C" },
+                  { language: "cs", label: "C#" },
+                  { language: "cpp", label: "C++" },
+                  { language: "css", label: "CSS" },
+                  { language: "diff", label: "Diff" },
+                  { language: "html", label: "HTML" },
+                  { language: "java", label: "Java" },
+                  { language: "javascript", label: "JavaScript" },
+                  { language: "php", label: "PHP" },
+                  { language: "python", label: "Python" },
+                  { language: "ruby", label: "Ruby" },
+                  { language: "typescript", label: "TypeScript" },
+                  { language: "xml", label: "XML" },
+                ],
+                // @ts-ignore
+                plugins: [
+                  Essentials,
+                  Paragraph,
+                  Bold,
+                  Italic,
+                  Heading,
+                  Indent,
+                  IndentBlock,
+                  Underline,
+                  Strikethrough,
+                  BlockQuote,
+                  Font,
+                  Alignment,
+                  List,
+                  Link,
+                  MediaEmbed,
+                  PasteFromOffice,
+                  Image,
+                  ImageStyle,
+                  ImageToolbar,
+                  ImageUpload,
+                  ImageResize,
+                  Base64UploadAdapter,
+                  Table,
+                  TableToolbar,
+                  TextTransformation,
+                  CodeBlock,
+                ],
+                toolbar: [
+                  "heading",
+                  "|",
+                  "bold",
+                  "italic",
+                  "underline",
+                  "strikethrough",
+                  "|",
+                  "fontSize",
+                  "fontColor",
+                  "fontBackgroundColor",
+                  "|",
+                  "alignment",
+                  "outdent",
+                  "indent",
+                  "bulletedList",
+                  "numberedList",
+                  "blockQuote",
+                  "|",
+                  "link",
+                  "insertTable",
+                  "imageUpload",
+                  "mediaEmbed",
+                  "|",
+                  "undo",
+                  "redo",
+                ],
+                heading: {
+                  options: [
+                    {
+                      model: "paragraph",
+                      view: "p",
+                      title: "Paragraph",
+                      class: "ck-heading_paragraph",
+                    },
+                    {
+                      model: "heading1",
+                      view: "h1",
+                      title: "Heading 1",
+                      class: "ck-heading_heading1",
+                    },
+                    {
+                      model: "heading2",
+                      view: "h2",
+                      title: "Heading 2",
+                      class: "ck-heading_heading2",
+                    },
+                    {
+                      model: "heading3",
+                      view: "h3",
+                      title: "Heading 3",
+                      class: "ck-heading_heading3",
+                    },
+                  ],
+                },
+                fontSize: {
+                  options: [
+                    9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 25, 27, 29, 31, 33, 35,
+                  ],
+                },
+              },
+              alignment: {
+                options: ["justify", "left", "center", "right"],
+              },
+              table: {
+                contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+              },
+              image: {
+                resizeUnit: "px",
+                toolbar: [
+                  "imageStyle:alignLeft",
+                  "imageStyle:full",
+                  "imageStyle:alignRight",
+                  "|",
+                  "imageTextAlternative",
+                ],
+                // @ts-ignore
+                styles: ["full", "alignLeft", "alignRight"],
+              },
+              typing: {
+                // @ts-ignore
+                transformations: {
+                  remove: [
+                    "enDash",
+                    "emDash",
+                    "oneHalf",
+                    "oneThird",
+                    "twoThirds",
+                    "oneForth",
+                    "threeQuarters",
+                  ],
+                },
+              },
+              placeholder: "Click here to start typing",
+            }}
+            onInit={(editor) => {
+              // You can store the "editor" and use when it is needed.
+              // console.log("Editor is ready to use!", editor);
+              editor.editing.view.change((writer) => {
+                writer.setStyle("width", "50%", editor.editing.view.document.getRoot())
+              })
+            }}
+            onReady={(editor) => {
+              // @ts-ignore
+              // Set the UI
+              editor.ui.getEditableElement().parentElement.insertBefore(
+                // @ts-ignore
+                editor.ui.view.toolbar.element,
+                // @ts-ignore
+                editor.ui.getEditableElement()
+              )
+              editor.editing.view.change((writer) => {
+                // @ts-ignore
+                writer.setStyle("width", "100%", editor.editing.view.document.getRoot())
+              })
+              // You can store the "editor" and use when it is needed.
+              console.log("Editor is ready to use!", editor)
+              // @ts-ignore
+              editorRef.current = editor
+            }}
+            // @ts-ignore
+            onChange={(event, editor) => {
+              // @ts-ignore
+              const data = editor.getData()
+              console.log({ event, editor, data })
+            }}
+            onBlur={(event, editor) => {
+              console.log("Blur.", editor)
+            }}
+            onFocus={(event, editor) => {
+              console.log("Focus.", editor)
+            }}
+            onError={(error, { willEditorRestart }) => {
+              // If the editor is restarted, the toolbar element will be created once again.
+              // The `onReady` callback will be called again and the new toolbar will be added.
+              // This is why you need to remove the older toolbar.
+              if (willEditorRestart) {
+                if (editorRef.current) {
+                  // @ts-ignore
+                  editorRef.current.ui.view.toolbar.element.remove()
+                }
+              }
+            }}
+            submitText="Create Paste"
+            schema={CreatePasteSchema}
+            // initialValues={{}}
+          />
+        ) : (
+          <p>Loading Nextjs Component ...</p>
+        )}
+        <button
+          type="submit"
+          label="Hit me!"
+          className={styles.button}
+          style={{ display: "block", margin: "0px auto" }}
+          onSubmit={async (values) => {
+            try {
+              const paste = await createPasteMutation(values)
+              await router.push(Routes.ShowPastePage({ pasteId: paste.id }))
+            } catch (error: any) {
+              console.error(error)
+              return {
+                [FORM_ERROR]: error.toString(),
               }
             }
           }}
-        />
-      ) : (
-        <p>Loading Nextjs Component ...</p>
-      )}
+        >
+          Hit me!
+        </button>
+      </form>
     </Layout>
   )
 }
