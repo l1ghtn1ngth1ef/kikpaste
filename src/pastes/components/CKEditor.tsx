@@ -10,13 +10,15 @@ import dynamic from "next/dynamic"
 import db from "db"
 import TextEditor from "src/pastes/components/CKEditor"
 import { useEffect, useState, useRef } from "react"
-import { PasteForm } from "src/pastes/components/PasteForm"
+import { PasteForm, FORM_ERROR } from "src/pastes/components/PasteForm"
 import { CreatePasteSchema } from "src/pastes/schemas"
 import { Form, FormProps } from "src/core/components/Form"
 import { LabeledTextField } from "src/core/components/LabeledTextField"
 import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor"
 import { CKEditor, CKEditorContext } from "@ckeditor/ckeditor5-react"
 import ContextBase from "@ckeditor/ckeditor5-core/src/context"
+import createPaste from "src/pastes/mutations/createPaste"
+import { useRouter } from "next/router"
 
 //import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials'
 //import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
@@ -49,6 +51,8 @@ import "src/styles/Home.module.css"
 const NewEditor = () => {
   const editorRef = useRef()
   const [editorLoaded, setEditorLoaded] = useState(false)
+  const router = useRouter()
+  const [createPasteMutation] = useMutation(createPaste)
   // @ts-ignore
   const {
     // @ts-ignore
@@ -149,7 +153,42 @@ const NewEditor = () => {
 
   return (
     <Layout title="Home">
-      <form>
+      <Form
+        onSubmit={async (values) => {
+          try {
+            const paste = await createPasteMutation(values)
+            await router.push(Routes.ShowPastePage({ pasteId: paste.id }))
+          } catch (error: any) {
+            console.error(error)
+            return {
+              [FORM_ERROR]: error.toString(),
+            }
+          }
+        }}
+      >
+        <div style={{ display: "block", margin: "0px auto" }}>
+          <div>
+            <LabeledTextField
+              name="pasteName"
+              label="Data Name"
+              placeholder="Data Name"
+              type="text"
+            />
+            <LabeledTextField
+              name="pasteDescription"
+              label="Data Desc"
+              placeholder="Data Desc"
+              type="text"
+            />
+            <LabeledTextField
+              className="pasteContent"
+              name="pasteContent"
+              label="Paste Content"
+              placeholder={data}
+              type="text"
+            />
+          </div>
+        </div>
         {editorLoaded ? (
           <CKEditor
             editor={DecoupledEditor}
@@ -358,21 +397,10 @@ const NewEditor = () => {
           label="Hit me!"
           className={styles.button}
           style={{ display: "block", margin: "0px auto" }}
-          onSubmit={async (values) => {
-            try {
-              const paste = await createPasteMutation(values)
-              await router.push(Routes.ShowPastePage({ pasteId: paste.id }))
-            } catch (error: any) {
-              console.error(error)
-              return {
-                [FORM_ERROR]: error.toString(),
-              }
-            }
-          }}
         >
           Hit me!
         </button>
-      </form>
+      </Form>
     </Layout>
   )
 }
