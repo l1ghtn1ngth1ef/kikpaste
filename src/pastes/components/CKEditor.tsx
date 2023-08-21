@@ -366,6 +366,7 @@ const NewEditor = () => {
             onChange={(event, editor) => {
               // @ts-ignore
               const data = editor.getData()
+              setData(data)
               console.log({ event, editor, data })
             }}
             onBlur={(event, editor) => {
